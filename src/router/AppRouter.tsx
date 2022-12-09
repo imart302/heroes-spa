@@ -1,18 +1,31 @@
-import React from 'react'
+import React from 'react';
 import { Route, Routes, Navigate } from 'react-router-dom';
 import { LoginPage } from '../auth/pages';
-import { DCPage, MarvelPage } from '../heroes/pages';
 import { HeroesRoutes } from '../heroes/routes/HeroesRoutes';
-import { Navbar } from '../ui/components';
+import { PrivateRoute } from './PrivateRoute';
+import { PublicRoute } from './PublicRoute';
 
 export const AppRouter = () => {
   return (
-    <>
+ 
       <Routes>
+        <Route
+          path="/login"
+          element={
+            <PublicRoute>
+              <LoginPage />
+            </PublicRoute>
+          }
+        />
+        <Route
+          path="/*"
+          element={
+            <PrivateRoute>
+              <HeroesRoutes />
+            </PrivateRoute>
+          }
+        />
+      </Routes>
 
-        <Route path='/login' element={<LoginPage/>}/>
-        <Route path='/*' element={ <HeroesRoutes /> } />
-      </Routes> 
-    </>
-  )
-}
+  );
+};

@@ -10,7 +10,7 @@ export const Search = () => {
   const location = useLocation();
 
   const { q = '' } = queryString.parse(location.search);
-  console.log(q);
+  
   const heroes = useMemo(() => {
     if (q == '') return [];
 
@@ -46,7 +46,7 @@ export const Search = () => {
           <h4>Seaching</h4>
           <hr></hr>
 
-          <form onSubmit={onFormSubmit}>
+          <form onSubmit={onFormSubmit} aria-label="form">
             <input
               type="text"
               placeholder="Search a hero"
@@ -66,12 +66,14 @@ export const Search = () => {
           <hr></hr>
 
           <div
+            aria-label="info-search-hero"
             className="alert alert-primary"
             style={{ display: q != '' ? 'none' : '' }}
           >
             Search a hero
           </div>
           <div
+            aria-label="alert-hero-notfound"
             className="alert alert-danger"
             style={{
               display:
